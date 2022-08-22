@@ -27,7 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     longitude = locBrain.longitude;
 
     String uri =
-        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey';
+        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey?units=metric';
 
     NetworkHelper networkHelper = NetworkHelper(uri);
 
@@ -36,7 +36,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return LocationScreen();
+        return LocationScreen(
+          locationWeather: weatherData,
+        );
       }),
     );
   }
@@ -51,7 +53,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: Colors.amber,
+        ),
       ),
     );
   }
